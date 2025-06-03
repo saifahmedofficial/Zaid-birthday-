@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Brother!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap');
+        
+        :root {
+            --primary: #ec4899;
+            --secondary: #f472b6;
+            --dark: #831843;
+            --light: #fdf2f8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 90%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(236, 72, 153, 0.2);
+            overflow: hidden;
+            position: relative;
+            margin: 2rem;
+            animation: fadeIn 1s ease;
+            border: 2px solid var(--secondary);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10-10-4.5-10-10z' fill='rgba(255,255,255,0.1)' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+        
+        .profile-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            position: relative;
+            margin-top: 1rem;
+            animation: float 4s ease-in-out infinite;
+            z-index: 2;
+        }
+        
+        @media (max-width: 480px) {
+            .profile-container {
+                width: 120px;
+                height: 120px;
+            }
+        }
+        
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .birthday-text {
+            margin-top: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        .content {
+            padding: 2rem;
+            text-align: center;
+            background-color: var(--light);
+            position: relative;
+        }
+        
+        @media (max-width: 480px) {
+            .content {
+                padding: 1.5rem;
+            }
+        }
+        
+        .message-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.3);
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        @media (max-width: 480px) {
+            .message-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        .message-btn:hover {
+            background: #db2777;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(236, 72, 153, 0.4);
+        }
+        
+        .message-btn::after {
+            content: "❤️";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        
+        .message-btn:hover::after {
+            top: -40px;
+            opacity: 1;
+        }
+        
+        .hidden-message {
+            display: none;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 4px solid var(--primary);
+            animation: slideUp 0.5s ease;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        @media (max-width: 480px) {
+            .hidden-message {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: floatUp 4s linear forwards;
+            font-size: 20px;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes floatUp {
+            0% { 
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .heart-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .heart-bg i {
+            position: absolute;
+            display: block;
+            color: rgba(236, 72, 153, 0.15);
+            animation: floatUp 15s linear infinite;
+            bottom: -100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart-bg">
+            <!-- Background hearts -->
+            <i>❤</i>
+            <i>❤</i>
+            <i>❤</i>
+            <i>❤</i>
+            <i>❤</i>
+        </div>
+        
+        <div class="header">
+            <div class="profile-container">
+                <!-- Replace with your brother's profile picture -->
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Brother's Photo" class="profile-pic">
+            </div>
+            <div class="birthday-text">
+                <h1>Happy Birthday, Brother!</h1>
+            </div>
+        </div>
+        
+        <div class="content">
+            <button class="message-btn" id="messageBtn">Click for Special Message ❤️</button>
+            
+            <div class="hidden-message" id="hiddenMessage">
+                <p style="font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--dark); margin-bottom: 1rem;">Dear Brother,</p>
+                <p>my best brother ❤️‍🩹</p>
+                <p style="margin-top: 1rem;">once again happy level up day</p>
+                <p style="font-family: 'Dancing Script', cursive; font-size: 1.3rem; color: var(--primary); margin-top: 1.5rem;">Love you always! ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const messageBtn = document.getElementById('messageBtn');
+            const hiddenMessage = document.getElementById('hiddenMessage');
+            const container = document.querySelector('.container');
+            
+            // Create background hearts
+            function createBackgroundHearts() {
+                const heartBg = document.querySelector('.heart-bg');
+                const hearts = ['❤', '🧡', '💛', '💚', '💙', '💜'];
+                
+                for (let i = 0; i < 15; i++) {
+                    const heart = document.createElement('i');
+                    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                    heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                    heart.style.animationDelay = (Math.random() * 5) + 's';
+                    heartBg.appendChild(heart);
+                }
+            }
+            
+            messageBtn.addEventListener('click', function() {
+                hiddenMessage.style.display = 'block';
+                createHearts();
+                messageBtn.style.display = 'none';
+                
+                // Add pulsing animation to message
+                hiddenMessage.style.animation = 'pulse 1s ease';
+                setTimeout(() => {
+                    hiddenMessage.style.animation = '';
+                }, 1000);
+            });
+            
+            function createHearts() {
+                const hearts = ['❤', '💖', '💗', '💓', '💞', '💕'];
+                
+                for (let i = 0; i < 50; i++) {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.top = window.innerHeight + 'px';
+                    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    
+                    document.body.appendChild(heart);
+                    
+                    // Remove heart after animation
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 4000);
+                }
+            }
+            
+            createBackgroundHearts();
+        });
+    </script>
+</body>
+</html>
